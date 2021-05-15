@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-demo-app
+  labels:
+    app: k8s-demo-app
+spec:
+  rules:
+  - host: k8s-demo-app-eduk8s-labs-w05-s033.reg-prod-e7decde.tanzu-labs.esp.vmware.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: k8s-demo-app
+            port: 
+              number: 80

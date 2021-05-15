@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: k-s-demo-app
+build:
+  artifacts:
+  - image: eduk8s-labs-w05-s033-registry.reg-prod-e7decde.tanzu-labs.esp.vmware.com/apps/demo
+    buildpacks:
+      builder: gcr.io/paketo-buildpacks/builder:base-platform-api-0.3
+      dependencies:
+        paths:
+          - src
+          - pom.xml
+deploy:
+  kustomize:
+    paths: ["kustomize/base"]
+profiles:
+  - name: qa
+    deploy:
+      kustomize:
+        paths: ["kustomize/qa"]
+portForward:
+- resourceType: service
+  resourceName: k8s-demo-app 
+  port: 80
+  localPort: 4503
