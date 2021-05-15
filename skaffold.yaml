@@ -21,6 +21,10 @@ profiles:
         paths: ["kustomize/qa"]
 portForward:
 - resourceType: service
+  resourceName: k8s-workshop-name-service 
+  port: 80
+  localPort: 4504
+- resourceType: service
   resourceName: k8s-demo-app 
   port: 80
   localPort: 4503
